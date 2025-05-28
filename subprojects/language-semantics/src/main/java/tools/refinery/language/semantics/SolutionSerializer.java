@@ -333,7 +333,7 @@ public class SolutionSerializer {
 		for (var entry : trace.getRelationTrace().entrySet()) {
 			if (entry.getKey() instanceof PredicateDefinition predicateDefinition &&
 					ProblemUtil.isBasePredicate(predicateDefinition)) {
-				var partialRelation = entry.getValue();
+				var partialRelation = entry.getValue().asPartialRelation();
 				addDefaultAssertion(partialRelation);
 				addAssertions(partialRelation);
 			}
@@ -407,7 +407,7 @@ public class SolutionSerializer {
 					ProblemUtil.isComputedValuePredicate(predicateDefinition) &&
 					predicateDefinition.eContainer() instanceof PredicateDefinition parentDefinition &&
 					!ProblemUtil.isError(parentDefinition)) {
-				var computedRelation = entry.getValue();
+				var computedRelation = entry.getValue().asPartialRelation();
 				var partialRelation = trace.getPartialRelation(parentDefinition);
 				addComputedAssertions(computedRelation, partialRelation);
 			}
